@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentforce + Data Cloud — Guía de Precios</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Salesforce+Sans:wght@400;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --sf-blue: #0176D3;
+    --sf-dark-blue: #032D60;
+    --sf-light-blue: #D8EDFF;
+    --sf-teal: #06A59A;
+    --sf-green: #3BA755;
+    --sf-orange: #FE9339;
+    --sf-purple: #7526E3;
+    --sf-red: #EA001E;
+    --sf-gray-100: #F3F3F3;
+    --sf-gray-200: #E5E5E5;
+    --sf-gray-500: #747474;
+    --sf-gray-800: #2B2826;
+    --bg: #F8FAFB;
+    --card: #FFFFFF;
+    --radius: 16px;
+    --shadow: 0 4px 24px rgba(1,118,211,0.10);
+    --shadow-lg: 0 8px 40px rgba(1,118,211,0.16);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--sf-gray-800);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── SLIDES CONTAINER ── */
+  .slides { width: 100%; }
+  .slide {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 80px;
+    page-break-after: always;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── SLIDE 1: COVER ── */
+  .slide-cover {
+    background: linear-gradient(135deg, var(--sf-dark-blue) 0%, #0B5CAB 55%, var(--sf-blue) 100%);
+    color: white;
+    align-items: flex-start;
+  }
+  .slide-cover::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .slide-cover::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 350px; height: 350px;
+    border-radius: 50%;
+    background: rgba(6,165,154,0.15);
+  }
+  .cover-tag {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #A8D8FF;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    display: inline-block;
+    margin-bottom: 32px;
+  }
+  .cover-title {
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 1.1;
+    max-width: 700px;
+    margin-bottom: 24px;
+    z-index: 1;
+    position: relative;
+  }
+  .cover-title span { color: #06D6C8; }
+  .cover-subtitle {
+    font-size: 22px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.8);
+    max-width: 560px;
+    margin-bottom: 56px;
+    z-index: 1;
+    position: relative;
+  }
+  .cover-pills {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    z-index: 1; position: relative;
+  }
+  .cover-pill {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    padding: 10px 22px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .cover-date {
+    position: absolute;
+    bottom: 40px; right: 80px;
+    color: rgba(255,255,255,0.45);
+    font-size: 13px;
+    font-weight: 400;
+  }
+  .sf-logo {
+    position: absolute; top: 40px; right: 80px;
+    font-size: 13px; font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── SECTION HEADER SLIDES ── */
+  .slide-section {
+    background: linear-gradient(120deg, var(--sf-dark-blue) 0%, #0B5CAB 100%);
+    color: white;
+    align-items: flex-start;
+  }
+  .section-number {
+    font-size: 120px;
+    font-weight: 800;
+    color: rgba(255,255,255,0.08);
+    line-height: 1;
+    position: absolute;
+    right: 80px; top: 50%;
+    transform: translateY(-50%);
+  }
+  .section-eyebrow {
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: #06D6C8;
+    margin-bottom: 20px;
+  }
+  .section-title {
+    font-size: 52px; font-weight: 800;
+    line-height: 1.15; max-width: 640px;
+    margin-bottom: 20px;
+  }
+  .section-desc {
+    font-size: 18px; color: rgba(255,255,255,0.7);
+    max-width: 560px; font-weight: 300;
+  }
+
+  /* ── CONTENT SLIDES ── */
+  .slide-content {
+    background: var(--bg);
+    align-items: stretch;
+    justify-content: flex-start;
+    padding-top: 70px;
+  }
+  .slide-title {
+    font-size: 36px; font-weight: 800;
+    color: var(--sf-dark-blue);
+    margin-bottom: 8px;
+  }
+  .slide-title .accent { color: var(--sf-blue); }
+  .slide-eyebrow {
+    font-size: 12px; font-weight: 600; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--sf-blue);
+    margin-bottom: 10px;
+  }
+  .slide-subtitle {
+    font-size: 16px; color: var(--sf-gray-500);
+    margin-bottom: 40px; font-weight: 400;
+  }
+  .divider {
+    width: 56px; height: 4px;
+    background: linear-gradient(90deg, var(--sf-blue), var(--sf-teal));
+    border-radius: 2px;
+    margin-bottom: 40px;
+  }
+
+  /* ── STAT CARDS ── */
+  .stats-row {
+    display: grid; gap: 24px;
+    margin-bottom: 32px;
+  }
+  .stats-row.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .stats-row.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .stats-row.cols-2 { grid-template-columns: repeat(2, 1fr); }
+
+  .stat-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--sf-blue);
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .stat-card.teal { border-top-color: var(--sf-teal); }
+  .stat-card.green { border-top-color: var(--sf-green); }
+  .stat-card.orange { border-top-color: var(--sf-orange); }
+  .stat-card.purple { border-top-color: var(--sf-purple); }
+  .stat-card.dark { background: var(--sf-dark-blue); color: white; border-top-color: #06D6C8; }
+  .stat-card.dark .stat-label { color: rgba(255,255,255,0.6); }
+
+  .stat-icon { font-size: 28px; margin-bottom: 4px; }
+  .stat-value { font-size: 42px; font-weight: 800; color: var(--sf-dark-blue); line-height: 1; }
+  .stat-card.dark .stat-value { color: #06D6C8; }
+  .stat-unit { font-size: 18px; font-weight: 600; color: var(--sf-blue); }
+  .stat-label { font-size: 13px; font-weight: 500; color: var(--sf-gray-500); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+  .stat-desc { font-size: 14px; color: var(--sf-gray-500); margin-top: 4px; }
+
+  /* ── TABLES ── */
+  .table-wrap {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { background: var(--sf-dark-blue); color: white; }
+  thead th {
+    padding: 16px 20px; text-align: left;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
+  }
+  tbody tr { border-bottom: 1px solid var(--sf-gray-200); transition: background .15s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--sf-light-blue); }
+  tbody td {
+    padding: 14px 20px; font-size: 14px; color: var(--sf-gray-800);
+    vertical-align: top;
+  }
+  .td-bold { font-weight: 700; color: var(--sf-dark-blue); }
+  .td-highlight { font-weight: 700; color: var(--sf-blue); }
+  .td-green { font-weight: 700; color: var(--sf-green); }
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 100px;
+    font-size: 11px; font-weight: 700; letter-spacing: .5px;
+  }
+  .badge-blue { background: var(--sf-light-blue); color: var(--sf-blue); }
+  .badge-green { background: #D4EDDA; color: var(--sf-green); }
+  .badge-orange { background: #FFF0DD; color: var(--sf-orange); }
+  .badge-red { background: #FCECED; color: var(--sf-red); }
+  .badge-gray { background: var(--sf-gray-200); color: var(--sf-gray-500); }
+
+  /* ── CALLOUT BOX ── */
+  .callout {
+    border-radius: 12px; padding: 20px 24px;
+    display: flex; gap: 16px; align-items: flex-start;
+    margin-bottom: 24px;
+  }
+  .callout-blue { background: var(--sf-light-blue); border-left: 4px solid var(--sf-blue); }
+  .callout-green { background: #D4EDDA; border-left: 4px solid var(--sf-green); }
+  .callout-orange { background: #FFF0DD; border-left: 4px solid var(--sf-orange); }
+  .callout-red { background: #FCECED; border-left: 4px solid var(--sf-red); }
+  .callout-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+  .callout-text { font-size: 14px; line-height: 1.6; }
+  .callout-text strong { font-weight: 700; }
+
+  /* ── LIST ── */
+  .check-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .check-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 15px; color: var(--sf-gray-800);
+    background: var(--card); border-radius: 10px; padding: 14px 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .check-list li .icon { flex-shrink: 0; font-size: 18px; margin-top: 1px; }
+
+  /* ── TWO COLUMN ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .col-card {
+    background: var(--card); border-radius: var(--radius);
+    padding: 28px; box-shadow: var(--shadow);
+  }
+  .col-card h3 {
+    font-size: 16px; font-weight: 700;
+    color: var(--sf-dark-blue); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .tl-item {
+    display: flex; gap: 24px; align-items: stretch;
+    padding-bottom: 0;
+  }
+  .tl-left { display: flex; flex-direction: column; align-items: center; width: 48px; flex-shrink: 0; }
+  .tl-dot { width: 20px; height: 20px; border-radius: 50%; background: var(--sf-blue); flex-shrink: 0; border: 3px solid white; box-shadow: 0 0 0 3px var(--sf-blue); }
+  .tl-line { width: 2px; flex: 1; background: var(--sf-gray-200); margin: 4px 0; }
+  .tl-item:last-child .tl-line { display: none; }
+  .tl-content { flex: 1; background: var(--card); border-radius: 12px; padding: 16px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .tl-date { font-size: 11px; font-weight: 700; color: var(--sf-blue); text-transform: uppercase; letter-spacing: 1px; }
+  .tl-title { font-size: 15px; font-weight: 700; color: var(--sf-dark-blue); margin: 4px 0; }
+  .tl-desc { font-size: 13px; color: var(--sf-gray-500); }
+
+  /* ── FOOTER ── */
+  .slide-footer {
+    position: absolute; bottom: 24px; left: 80px; right: 80px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: var(--sf-gray-500);
+    border-top: 1px solid var(--sf-gray-200);
+    padding-top: 12px;
+  }
+  .slide-footer .page { font-weight: 600; color: var(--sf-blue); }
+
+  /* ── PRINT ── */
+  @media print {
+    .slide { page-break-after: always; min-height: 100vh; }
+  }
+
+  /* ── Example scenario card ── */
+  .scenario-card {
+    background: linear-gradient(135deg, var(--sf-dark-blue), #0B5CAB);
+    color: white; border-radius: var(--radius); padding: 36px 40px;
+    margin-bottom: 24px;
+  }
+  .scenario-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #06D6C8; }
+  .scenario-card p { font-size: 15px; color: rgba(255,255,255,0.75); margin-bottom: 24px; }
+  .scenario-steps {
+    display: flex; gap: 0; align-items: stretch;
+  }
+  .scenario-step {
+    flex: 1; text-align: center; padding: 16px 12px;
+    border-right: 1px solid rgba(255,255,255,0.15);
+  }
+  .scenario-step:last-child { border-right: none; }
+  .sc-num { font-size: 32px; font-weight: 800; color: #06D6C8; }
+  .sc-label { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+  .sc-desc { font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 2px; }
+
+  /* ── Included FREE card ── */
+  .free-card {
+    background: linear-gradient(135deg, #d4f5f3 0%, #e8f7e8 100%);
+    border: 2px solid #06A59A;
+    border-radius: var(--radius);
+    padding: 28px;
+  }
+  .free-card h3 { color: #0A7A72; font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+
+</style>
+</head>
+<body>
+<div class="slides">
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 1: COVER
+══════════════════════════════════════════════════════ -->
+<div class="slide slide-cover">
+  <div class="sf-logo">Salesforce Confidential</div>
+  <div class="cover-tag">Guía de Precios · 2026</div>
+  <div class="cover-title">
+    Agentforce<br>
+    <span>+ Data Cloud</span><br>
+    Pricing Guide
+  </div>
+  <div class="cover-subtitle">
+    Todo lo que necesitás saber sobre Flex Credits — la moneda unificada para IA + Datos en Salesforce.
+  </div>
+  <div class="cover-pills">
+    <div class="cover-pill">💳 Flex Credits</div>
+    <div class="cover-pill">🤖 Agentforce</div>
+    <div class="cover-pill">🌐 Data 360</div>
+    <div class="cover-pill">📊 Digital Wallet</div>
+  </div>
+  <div class="cover-date">Effective: February 23, 2026</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 2: THE BIG CHANGE
+══════════════════════════════════════════════════════ -->
+<div class="slide slide-content">
+  <div class="slide-eyebrow">El cambio más importante</div>
+  <div class="slide-title">Una sola moneda para <span class="accent">IA + Datos</span></div>
+  <div class="divider"></div>
+
+  <div class="callout callout-blue">
+    <div class="callout-icon">💡</div>
+    <div class="callout-text">
+      <strong>Desde el 23 de febrero de 2026</strong>, Data 360 y Agentforce comparten una única moneda: <strong>Flex Credits</strong>.
+      Ya no hay dos sistemas separados — un solo pool, total flexibilidad para distribuir gasto entre datos e IA.
+    </div>
+  </div>
+
+  <div class="stats-row cols-3">
+    <div class="stat-card">
+      <div class="stat-icon">💰</div>
+      <div class="stat-value">$500</div>
+      <div class="stat-unit">/ 100K Flex Credits</div>
+      <div class="stat-label">Precio de lista</div>
+      <div class="stat-desc">$0.005 por crédito</div>
+    </div>
+    <div class="stat-card teal">
+      <div class="stat-icon">🔄</div>
+      <div class="stat-value">100%</div>
+      <div class="stat-unit">Fungibles</div>
+      <div class="stat-label">Intercambiables</div>
+      <div class="stat-desc">Agentforce, Data 360, Voice, Prompts</div>
+    </div>
+    <div class="stat-card dark">
+      <div class="stat-icon">📅</div>
+      <div class="stat-value">May 1</div>
+      <div class="stat-unit">2026</div>
+      <div class="stat-label">End of Sale: Data Services Credits</div>
+      <div class="stat-desc">Clientes actuales los mantienen hasta renovación</div>
+    </div>
+  </div>
+
+  <div class="callout callout-orange">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-text">
+      <strong>Contratos firmados después del 24 de octubre de 2025</strong> son solo Flex Credits. El modelo de Conversations ($2/sesión) ya no se vende a nuevos clientes.
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span>Agentforce + Data Cloud — Pricing Guide 2026</span>
+    <span class="page">2 / 9</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 3: AGENTFORCE PRICING
+══════════════════════════════════════════════════════ -->
+<div class="slide slide-content">
+  <div class="slide-eyebrow">Agentforce Pricing</div>
+  <div class="slide-title">Se cobra por <span class="accent">acción ejecutada</span>, no por usuario</div>
+  <div class="divider"></div>
+
+  <div class="stats-row cols-4">
+    <div class="stat-card">
+      <div class="stat-icon">⚡</div>
+      <div class="stat-value">20</div>
+      <div class="stat-unit">FC / acción</div>
+      <div class="stat-label">Estándar</div>
+      <div class="stat-desc">Digital / texto</div>
+    </div>
+    <div class="stat-card orange">
+      <div class="stat-icon">🎙️</div>
+      <div class="stat-value">30</div>
+      <div class="stat-unit">FC / acción</div>
+      <div class="stat-label">Voz (Voice)</div>
+      <div class="stat-desc">+50% sobre estándar</div>
+    </div>
+    <div class="stat-card teal">
+      <div class="stat-icon">🧪</div>
+      <div class="stat-value">16</div>
+      <div class="stat-unit">FC / acción</div>
+      <div class="stat-label">Sandbox / Dev</div>
+      <div class="stat-desc">80% del precio de producción</div>
+    </div>
+    <div class="stat-card purple">
+      <div class="stat-icon">🔗</div>
+      <div class="stat-value">~14</div>
+      <div class="stat-unit">FC / acción</div>
+      <div class="stat-label">BYOLLM</div>
+      <div class="stat-desc">~30% menos que estándar</div>
+    </div>
+  </div>
+
+  <div class="scenario-card">
+    <h3>🎯 Ejemplo: AEA resume un Case</h3>
+    <p>Un empleado abre Agentforce Employee Agent y pide un resumen de caso. Flujo típico:</p>
+    <div class="scenario-steps">
+      <div class="scenario-step">
+        <div class="sc-num">1</div>
+        <div class="sc-label">Identifica usuario</div>
+        <div class="sc-desc">1 acción = $0.10</div>
+      </div>
+      <div class="scenario-step">
+        <div class="sc-num">1</div>
+        <div class="sc-label">Recupera el caso</div>
+        <div class="sc-desc">1 acción = $0.10</div>
+      </div>
+      <div class="scenario-step">
+        <div class="sc-num">1</div>
+        <div class="sc-label">Genera el resumen</div>
+        <div class="sc-desc">1 acción = $0.10</div>
+      </div>
+      <div class="scenario-step" style="background:rgba(6,214,200,0.15); border-radius:8px;">
+        <div class="sc-num" style="color:#fff;">$0.30</div>
+        <div class="sc-label" style="color:rgba(255,255,255,0.9);">Total interacción</div>
+        <div class="sc-desc">3 acciones × 20 FC</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span>Agentforce + Data Cloud — Pricing Guide 2026</span>
+    <span class="page">3 / 9</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 4: TOKEN ALLOWANCE + SCENARIOS TABLE
+══════════════════════════════════════════════════════ -->
+<div class="slide slide-content">
+  <div class="slide-eyebrow">Agentforce — Detalle técnico</div>
+  <div class="slide-title">Tokens por acción y <span class="accent">todos los escenarios</span></div>
+  <div class="divider"></div>
+
+  <div class="two-col">
+    <div>
+      <p style="font-size:14px; color:var(--sf-gray-500); margin-bottom:16px;">Cada acción incluye hasta <strong>10,000 tokens</strong> (input + output combinados). Exceder ese límite agrega acciones automáticamente.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Tokens usados</th><th>Acciones cobradas</th></tr></thead>
+          <tbody>
+            <tr><td>Hasta 10,000</td><td class="td-green">1 acción</td></tr>
+            <tr><td>10,001 – 20,000</td><td class="td-highlight">2 acciones</td></tr>
+            <tr><td>20,001 – 30,000</td><td class="td-highlight">3 acciones</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="table-wrap" style="margin-bottom:0;">
+      <table>
+        <thead><tr><th>Escenario</th><th>FC / acción</th><th>Costo</th></tr></thead>
+        <tbody>
+          <tr><td>Acción OOTB (summarize case)</td><td class="td-bold">20 FC</td><td class="td-green">$0.10</td></tr>
+          <tr><td>Custom action (Flow, Apex, API)</td><td class="td-bold">20 FC</td><td class="td-green">$0.10</td></tr>
+          <tr><td>Agent personalizado (Agent Builder)</td><td class="td-bold">20 FC</td><td class="td-green">$0.10</td></tr>
+          <tr><td>BYOLLM</td><td class="td-bold">~14 FC</td><td class="td-highlight">~$0.07</td></tr>
+          <tr><td>Sandbox / Desarrollo</td><td class="td-bold">16 FC</td><td class="td-highlight">$0.08</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout callout-orange" style="margin-top:24px;">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-text">
+      <strong>BYOLLM:</strong> seguís pagando FC por la orquestación Atlas. El costo del LLM externo (OpenAI, Azure, Bedrock) se paga <em>por separado</em> al proveedor.
+      El ahorro del 30% aplica solo al modelo Flex Credits, no al modelo legacy de $2/conversación.
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span>Agentforce + Data Cloud — Pricing Guide 2026</span>
+    <span class="page">4 / 9</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 5: DATA 360 PRICING
+══════════════════════════════════════════════════════ -->
+<div class="slide slide-content">
+  <div class="slide-eyebrow">Data 360 Pricing</div>
+  <div class="slide-title">Qué es <span class="accent">gratis</span> y qué consume créditos</div>
+  <div class="divider"></div>
+
+  <div class="two-col">
+    <div>
+      <div class="free-card">
+        <h3>✅ GRATIS — No consume créditos</h3>
+        <ul class="check-list">
+          <li><span class="icon">📥</span><div><strong>Batch data ingestion</strong><br><span style="font-size:12px;color:var(--sf-gray-500);">Carga de datos a Data Cloud</span></div></li>
+          <li><span class="icon">🔍</span><div><strong>Zero-copy data federation</strong><br><span style="font-size:12px;color:var(--sf-gray-500);">Query in-place sin mover datos</span></div></li>
+          <li><span class="icon">💾</span><div><strong>Data storage</strong><br><span style="font-size:12px;color:var(--sf-gray-500);">Incluido en el SKU de provisioning</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>💳 Actividad Metered</th><th>Ejemplo</th></tr></thead>
+          <tbody>
+            <tr><td class="td-bold">Identity Resolution</td><td>Unificación de perfiles</td></tr>
+            <tr><td class="td-bold">Calculated Insights</td><td>Aggregations sobre datos unificados</td></tr>
+            <tr><td class="td-bold">Segmentation</td><td>Construcción de audiencias</td></tr>
+            <tr><td class="td-bold">Data Activation</td><td>Push a marketing/ad tools</td></tr>
+            <tr><td class="td-bold">Real-time streaming</td><td>Ingesta de eventos en vivo</td></tr>
+            <tr><td class="td-bold">RAG / Retrieval</td><td>Grounding de IA con knowledge</td></tr>
+            <tr><td class="td-bold">Gen AI Audit &amp; Tracing</td><td>Logging de LLM calls</td></tr>
+            <tr><td class="td-bold">Data Queries via API</td><td>Acceso programático</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-blue" style="margin-top:16px; margin-bottom:0;">
+        <div class="callout-icon">📉</div>
+        <div class="callout-text">
+          <strong>Multiplicadores de volumen:</strong> a mayor consumo, mejor descuento efectivo — escala automáticamente.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span>Agentforce + Data Cloud — Pricing Guide 2026</span>
+    <span class="page">5 / 9</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 6: INCLUDED FREE
+══════════════════════════════════════════════════════ -->
+<div class="slide slide-content">
+  <div class="slide-eyebrow">Getting Started</div>
+  <div class="slide-title">Créditos incluidos <span class="accent">sin costo adicional</span></div>
+  <div class="divider"></div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>SKU</th>
+          <th>Flex Credits Incluidos</th>
+          <th>Otras Inclusiones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-bold">Salesforce Foundations <span class="badge badge-green">GRATIS</span></td>
+          <td class="td-highlight">200,000 FC</td>
+          <td>Base Data Cloud instance</td>
+        </tr>
+        <tr>
+          <td class="td-bold">Data 360 Provisioning SKU <span class="badge badge-blue">$0</span></td>
+          <td class="td-highlight">250,000 FC</td>
+          <td>1 TB storage · 1 Data Space · 1 Data 360 Instance · 1 Admin + 100 Business User Licenses</td>
+        </tr>
+        <tr style="background:#F0FAF0;">
+          <td class="td-bold">🏆 Combinado (ambos)</td>
+          <td class="td-green" style="font-size:20px; font-weight:800;">450,000 FC</td>
+          <td>~22,500 acciones de Agentforce sin costo</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="stats-row cols-3" style="margin-top:8px;">
+    <div class="stat-card green">
+      <div class="stat-icon">🎁</div>
+      <div class="stat-value">450K</div>
+      <div class="stat-unit">FC incluidos</div>
+      <div class="stat-label">Si tienes ambos SKUs</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">🤖</div>
+      <div class="stat-value">22,500</div>
+      <div class="stat-unit">acciones</div>
+      <div class="stat-label">Gratis para empezar</div>
+    </div>
+    <div class="stat-card teal">
+      <div class="stat-icon">💾</div>
+      <div class="stat-value">1 TB</div>
+      <div class="stat-unit">storage</div>
+      <div class="stat-label">Incluido en Data 360 SKU</div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span>Agentforce + Data Cloud — Pricing Guide 2026</span>
+    <span class="page">6 / 9</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 7: 3 WAYS TO BUY
+══════════════════════════════════════════════════════ -->
+<div class="slide slide-content">
+  <div class="slide-eyebrow">Modelos de compra</div>
+  <div class="slide-title">3 formas de <span class="accent">adquirir créditos</span></div>
+  <div class="divider"></div>
+
+  <div class="table-wrap" style="margin-bottom:28px;">
+    <table>
+      <thead>
+        <tr>
+          <th>Modelo</th>
+          <th>Cómo funciona</th>
+          <th>Ideal para</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-bold">✅ Flex Credits</td>
+          <td>Pago por acción (20 FC = $0.10); fungible entre Agentforce + Data 360</td>
+          <td>Mayoría de clientes; workloads flexibles</td>
+          <td><span class="badge badge-green">RECOMENDADO</span></td>
+        </tr>
+        <tr>
+          <td class="td-bold">📊 Data 360 Profile SKU</td>
+          <td>Perfiles predefinidos para casos CDP de volumen alto; desmetere ~90–95% del consumo base</td>
+          <td>Workloads de datos estables y alto volumen</td>
+          <td><span class="badge badge-blue">DISPONIBLE</span></td>
+        </tr>
+        <tr>
+          <td class="td-bold">💬 Conversations (legacy)</td>
+          <td>$2 por ventana de 24h (~20 turnos). Ya no se vende a nuevos clientes.</td>
+          <td>Contratos pre-oct 2025; agentes externos simples</td>
+          <td><span class="badge badge-red">LEGACY</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout callout-red">
+    <div class="callout-icon">🚫</div>
+    <div class="callout-text">
+      <strong>Conversations ya no está disponible para nuevos contratos</strong> firmados después del 24 de octubre de 2025.
+      Todos los contratos nuevos son exclusivamente Flex Credits.
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span>Agentforce + Data Cloud — Pricing Guide 2026</span>
+    <span class="page">7 / 9</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 8: SIZING EXAMPLE + SANDBOX
+══════════════════════════════════════════════════════ -->
+<div class="slide slide-content">
+  <div class="slide-eyebrow">Estimación de consumo</div>
+  <div class="slide-title">Ejemplo de sizing + <span class="accent">Sandbox</span></div>
+  <div class="divider"></div>
+
+  <div class="two-col">
+    <div>
+      <div class="col-card">
+        <h3>📐 Ejemplo: 100 empleados</h3>
+        <p style="font-size:13px; color:var(--sf-gray-500); margin-bottom:16px;">100 empleados × 3 interacciones/día × 260 días/año · avg. 3 acciones/interacción</p>
+        <div class="table-wrap" style="box-shadow:none;">
+          <table>
+            <tbody>
+              <tr><td>Total interacciones/año</td><td class="td-bold">78,000</td></tr>
+              <tr><td>Acciones por interacción</td><td class="td-bold">3</td></tr>
+              <tr><td>Total acciones</td><td class="td-bold">234,000</td></tr>
+              <tr><td>Flex Credits consumidos</td><td class="td-highlight">4,680,000 FC</td></tr>
+              <tr style="background:#F0FAF0;"><td><strong>Costo a precio de lista</strong></td><td class="td-green" style="font-size:18px; font-weight:800;">~$23,400</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="margin-top:12px; font-size:12px; color:var(--sf-gray-500);">💡 El costo real suele ser menor por descuentos de volumen y tarifas negociadas.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="col-card" style="border-left: 4px solid var(--sf-orange);">
+        <h3>🧪 Sandbox — Puntos clave</h3>
+        <ul class="check-list" style="gap:10px;">
+          <li><span class="icon">❌</span><div><strong>NO es gratis</strong><br><span style="font-size:12px;color:var(--sf-gray-500);">Usa el mismo pool de FC que producción</span></div></li>
+          <li><span class="icon">📉</span><div><strong>80% del precio de producción</strong><br><span style="font-size:12px;color:var(--sf-gray-500);">16 FC/acción vs. 20 FC en prod</span></div></li>
+          <li><span class="icon">👁️</span><div><strong>Agent Builder Preview</strong><br><span style="font-size:12px;color:var(--sf-gray-500);">Consume créditos a tarifa sandbox en desarrollo</span></div></li>
+          <li><span class="icon">🔬</span><div><strong>Testing Center</strong><br><span style="font-size:12px;color:var(--sf-gray-500);">Máx 10 test jobs / 10h · 1,000 casos/job</span></div></li>
+          <li><span class="icon">📊</span><div><strong>Planificá 10–20% extra</strong><br><span style="font-size:12px;color:var(--sf-gray-500);">Del estimado de producción para sandbox</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span>Agentforce + Data Cloud — Pricing Guide 2026</span>
+    <span class="page">8 / 9</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 9: DIGITAL WALLET + KEY TAKEAWAYS
+══════════════════════════════════════════════════════ -->
+<div class="slide slide-content">
+  <div class="slide-eyebrow">Monitoreo y control</div>
+  <div class="slide-title">Digital Wallet + <span class="accent">Takeaways clave</span></div>
+  <div class="divider"></div>
+
+  <div class="two-col">
+    <div>
+      <div class="col-card" style="border-left:4px solid var(--sf-blue);">
+        <h3>📊 Digital Wallet</h3>
+        <p style="font-size:13px; color:var(--sf-gray-500); margin-bottom:14px;"><strong>Setup → App Launcher → "Digital Wallet"</strong></p>
+        <ul class="check-list" style="gap:8px;">
+          <li><span class="icon">💰</span><div><strong>Balance en tiempo real</strong><br><span style="font-size:12px;color:var(--sf-gray-500);">FC restantes vs. comprados</span></div></li>
+          <li><span class="icon">📈</span><div><strong>Consumo por tipo</strong><br><span style="font-size:12px;color:var(--sf-gray-500);">Agentforce, Data 360, Voice, Prompts</span></div></li>
+          <li><span class="icon">🔀</span><div><strong>Sandbox vs. Producción</strong><br><span style="font-size:12px;color:var(--sf-gray-500);">Consumo separado por entorno</span></div></li>
+          <li><span class="icon">🕐</span><div><strong>Historial de uso</strong><br><span style="font-size:12px;color:var(--sf-gray-500);">Retiene analytics aunque expiren entitlements</span></div></li>
+          <li><span class="icon">🔔</span><div><strong>Alertas en 75% / 90% / 100%</strong><br><span style="font-size:12px;color:var(--sf-gray-500);">Email + puede disparar Flows</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <div class="callout callout-red" style="margin-bottom:0;">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-text">
+          <strong>Digital Wallet NO bloquea la ejecución</strong> cuando se agotan los créditos.
+          Los overages se facturan a tu tarifa contratada — las alertas son críticas.
+        </div>
+      </div>
+
+      <div style="background:var(--sf-dark-blue); border-radius:var(--radius); padding:28px; color:white;">
+        <div style="font-size:15px; font-weight:700; color:#06D6C8; margin-bottom:16px;">🎯 5 Takeaways Ejecutivos</div>
+        <ol style="padding-left:18px; display:flex; flex-direction:column; gap:10px;">
+          <li style="font-size:13px; color:rgba(255,255,255,0.85);">Una sola moneda: <strong>Flex Credits</strong> para IA + Datos</li>
+          <li style="font-size:13px; color:rgba(255,255,255,0.85);">Agentforce: <strong>$0.10 por acción</strong> (20 FC)</li>
+          <li style="font-size:13px; color:rgba(255,255,255,0.85);">Data ingestion y storage: <strong>gratis</strong>; procesamiento: metered</li>
+          <li style="font-size:13px; color:rgba(255,255,255,0.85);">Sandbox: <strong>no es gratis</strong> — presupuestá 10–20% extra</li>
+          <li style="font-size:13px; color:rgba(255,255,255,0.85);">Monitorear via <strong>Digital Wallet</strong>: alertas antes de agotar créditos</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span>Agentforce + Data Cloud — Pricing Guide 2026</span>
+    <span class="page">9 / 9</span>
+  </div>
+</div>
+
+</div><!-- /slides -->
+</body>
+</html>

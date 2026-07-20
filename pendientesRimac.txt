@@ -1,0 +1,34 @@
+Rimac
+---------
+AGENTES
+---------------
+-NTT ya recabó info de ventas, agentes: upgrade agente "renova", Polizas vehiculares, pricing.
+-Cobranzas: Aterrizar casos de uso, priorizar cuáles son los casos de uso. Hablar con cristobal y balaciano. para conversar con el cliente. Cobranzas proactivamente valida (whatsapp y correo electrónico), y luego after pasa a contact center. Prueba y errror han encontrado que es correo, pero la info llega en batch. la cobranza no llega siempre en tiempo real, es batch. fase 3: 27 millones de soles. revisar alcance de cobranzas.
+-Servicio: No quedan claros la cantidad de agentes, la mayoría en requerimientos y operaciones. 
+
+Hay que definir cuál priorizar. 
+
+presentación:
+parte 1
+----------
+-los agentes que se deben priozar
+-plan de implementación
+-costo asociado (inversión)
+-validar diferencias einstein credits vs flexcredits para whatsapp (YO PRIORIDAD)
+REducir y hablar de las capacidades nuevas, para poder explicarlos al usuario
+
+parte 2
+---------
+caso de negocio.  aterrizar el esfuerzo de agentes MVP vs Total
+priorizar formato visual de transformación
+
+
+MULESOFT
+-----------------
+-enviar mañana requerimientos para la POC.
+-checkpoint de lunes: preguntar por usuarios, desplegar ambientes (condiciones para la POC)
+-revalidar el comparativo hecho por JOACO
+
+
+
+
